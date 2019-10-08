@@ -13,7 +13,9 @@ app = Flask(__name__)
 def nlp_projects():
     return render_template('index.html')
 
-
+@app.route('/extract')
+def extractor():
+    return render_template('news_extractor.html')
 
 if __name__ == '__main__':
     app.run()
