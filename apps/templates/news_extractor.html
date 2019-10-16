@@ -63,11 +63,9 @@
         <form role="form" method="post" novalidate>
           <div class="form-group">
 <!--            <label for="name">文本框</label>-->
-            <textarea class="form-control" rows="4" style="background:rgba(0, 0, 0, 0); color:#0b0b0b;" name="news">
-                {% if forms.errors %}
-                    {{forms.data.get('news')}}
-                {% endif %}
-            </textarea>
+            <textarea class="form-control" rows="4" style="background:rgba(0, 0, 0, 0); color:#0b0b0b;" name="news">{% if forms.errors %}{{forms.data.get('news')}}{% endif %}</textarea>
+
+
               <span class="text-danger">{{ forms.errors.get('news')[0] }}</span>
           </div>
           <button type="submit" class="btn btn-primary btn-xl js-scroll-trigger" >Go</button>

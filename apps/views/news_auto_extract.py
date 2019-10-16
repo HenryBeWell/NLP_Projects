@@ -7,8 +7,8 @@
 @file: news_auto_extract.py
 @time: 2019/10/7 19:19
 """
-from flask import request
-from flask import render_template,redirect
+from flask import request, url_for
+from flask import render_template, redirect
 
 from apps.forms.news_extractor import NewsExtractorForm
 
@@ -22,7 +22,7 @@ def nlp_projects():
     return render_template('index.html')
 
 
-@nlp_bp.route('/extract/', methods=['GET', 'POST'])
+@nlp_bp.route('/extract/', endpoint='auto_extractor', methods=['GET', 'POST'])
 def auto_extractor():
     news_form = NewsExtractorForm(request.form)
     if request.method == 'POST' and news_form.validate():
@@ -30,13 +30,18 @@ def auto_extractor():
         data = news_form.news.data
         npa = SpeechExtractor(data, SYNONYMS_PATH, LTPM)
         results = npa()  # [[who,say,content],[...],...]
-        if results and len(results[0]) > 2:
-            result = [{'person': result[0], 'say': result[1], 'content': result[2],'news':data} for result in results]
-            # return redirect('extract.html', forms=result)
+        if results and isinstance(results, list):
+            result = [{'person': result[0], 'say': result[1], 'content': result[2], 'news': data} for result in results]
             return render_template('extract.html', forms=result)
         else:
-            return render_template('extract.html', forms=results)
+            return render_template('news_extractor.html', forms=news_form)
+            # return render_template('extract.html', forms=results)
     return render_template('news_extractor.html', forms=news_form)
+
+
+# @nlp_bp.route('show_res', endpoint='show_result')
+# def show_result(results):
+#     return render_template('extract.html', forms=results)
 
 
 if __name__ == '__main__':

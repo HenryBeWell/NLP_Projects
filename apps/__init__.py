@@ -14,7 +14,7 @@ from flask_bootstrap import Bootstrap
 # 注册各个蓝图对象
 def register_bp(app):
     from apps.views import nlp_bp
-    app.register_blueprint(nlp_bp)  # 商家后台的蓝图注册
+    app.register_blueprint(nlp_bp)  # 蓝图注册
 
     return None
 

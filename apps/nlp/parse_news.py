@@ -189,7 +189,8 @@ class SpeechExtractor(object):
                 if 'v' not in list(postags[expression_word_idx]): continue
 
                 for j, (k, v) in enumerate(arcs):
-                    postags_list = ['j', 'n', 'nh', 'ni', 'ns', 'nz']
+                    # 缩写，普通名词，人名，代词，机构名，地名，其它名词
+                    postags_list = ['j', 'n', 'nh', 'r', 'ni', 'ns', 'nz']
                     if (v == 'SBV' and k == expression_word_idx + 1) \
                             and (set(list(ner[j])) & {"S", "B", "I", "E"}
                                  or postags[j] in postags_list):

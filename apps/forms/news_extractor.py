@@ -13,7 +13,8 @@ from wtforms import validators
 
 
 class NewsExtractorForm(Form):
-    news = StringField(validators=[validators.InputRequired(message="请输入需检测信息..."),
+    news = StringField(validators=[validators.DataRequired(message="请输入需检测信息...",),
+                                   validators.InputRequired(message="请输入需检测信息..."),
                                    validators.Length(min=3, message="检测信息不能少于3个字符"),
                                    validators.Length(max=500, message="检测信息不能超过500个字符"),
                                    ],
