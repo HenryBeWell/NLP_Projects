@@ -10,7 +10,7 @@ def load_synonyms(file_name=None) -> list:
         file_name = DEFAULT_STOPWORDS_PATH
     try:
         with open(file_name, 'r', encoding='utf-8') as f:
-            synonyms = f.readlines()
+            synonyms = [i.strip() for i in f.readlines()]
         return synonyms
     except Exception as e:
         print(e)

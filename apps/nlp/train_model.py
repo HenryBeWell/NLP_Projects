@@ -2,7 +2,7 @@ from gensim.models import Word2Vec
 from gensim.models.word2vec import PathLineSentences
 import os
 import multiprocessing
-from config_bak import PROCESSED_DATA_PATH, WORD2VEC_MODEL_PATH, DEFAULT_SYNONYMS_PATH
+from apps.config import PROCESSED_DATA_PATH, WORD2VEC_MODEL_PATH, DEFAULT_SYNONYMS_PATH
 from apps.utils import clock
 
 
@@ -25,9 +25,9 @@ def train_word2vec_model(path):
         print(related_words)
         words = sorted(related_words.items(), key=lambda x: x[1], reverse=True)
         words = list(zip(*words))[0]
-        with open(DEFAULT_SYNONYMS_PATH,'w',encoding='utf-8') as f:
+        with open(DEFAULT_SYNONYMS_PATH, 'w', encoding='utf-8') as f:
             for word in words:
-                f.write(word+'\n')
+                f.write(word + '\n')
         return model
     else:
         print(path, ' does not exit')
